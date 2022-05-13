@@ -1,10 +1,11 @@
 <template>
   <div class="add-product-card">
-    <form action="#" method="post">
+    <form action="#" method="post" onsubmit="return false;">
       <ul class="list">
         <li>
           <label for="name">Наименование товара<sup>&bull;</sup></label>
           <input
+            v-model="name"
             type="text"
             id="name"
             name="product_name"
@@ -14,14 +15,18 @@
         <li>
           <label for="description">Описание товара</label>
           <textarea
+            v-model="description"
             id="description"
             name="description"
             placeholder="Введите описание товара"
           ></textarea>
         </li>
         <li>
-          <label for="mail">Ссылка на изображение товара<sup>&bull;</sup></label>
+          <label for="mail"
+            >Ссылка на изображение товара<sup>&bull;</sup></label
+          >
           <input
+            v-model="imgSrc"
             type="url"
             id="img_link"
             name="img_link"
@@ -31,6 +36,7 @@
         <li>
           <label for="price">Цена товара<sup>&bull;</sup></label>
           <input
+            v-model="price"
             type="number"
             id="price"
             name="price"
@@ -38,10 +44,38 @@
           />
         </li>
       </ul>
-      <button type="submit">Добавить товар</button>
+      <button v-on:click="addProduct">Добавить товар</button>
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: null,
+      description: null,
+      imgSrc: null,
+      price: null,
+    };
+  },
+  methods: {
+    addProduct: function () {
+      let newProduct = {
+        name: this.name,
+        description: this.description,
+        imgSrc: this.imgSrc,
+        price: this.price,
+      };
+      this.$store.dispatch('addProduct', newProduct);
+      this.name = '';
+      this.description = '';
+      this.imgSrc = '';
+      this.price = '';
+    },
+  },
+};
+</script>
 
 <style scoped>
 label {
@@ -60,7 +94,7 @@ li {
 
 sup {
   font-size: small;
-  color:red;
+  color: red;
 }
 
 input {
@@ -117,7 +151,7 @@ button {
   background: #eeeeee;
   border: solid;
   border-color: #eeeeee;
-  color: #B4B4B4;
+  color: #b4b4b4;
   border-radius: 10px;
   font-family: "Inter", sans-serif;
   font-style: normal;

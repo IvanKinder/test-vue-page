@@ -4,16 +4,29 @@
     <div class="content">
       <AddProductCard />
       <div class="products-grid">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        <div v-for="product in products" :key="product.id">
+          <ProductCard
+            :productName="product.name"
+            :productDescription="product.description"
+            :productPrice="product.price"
+            :productImage="product.imgSrc"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+
+<script>
+export default {
+  data() {
+    return {
+      products: this.$store.state.productsList,
+    };
+  },
+};
+</script>
 
 <style>
 * {
@@ -26,7 +39,7 @@ html {
   margin: 0 auto;
 }
 .page {
-  background: #FAF9F7;
+  background: #faf9f7;
 }
 .content {
   display: flex;

@@ -1,19 +1,56 @@
 <template>
-  <div class="product">
-    <img src="../static/img/default.png" alt="default" />
+  <div class="product" @mouseover="onTrashButton" @mouseleave="offTrashButton">
+    <img class="product-image" :src="productImage" alt="default" />
+    <img v-show="hovered" class="trash-image" :src="trashImage" alt="trash" />
     <div class="product-text">
-      <p class="product-name">Наименование товара</p>
-      <p class="product-description">
-        Довольно-таки интересное описание товара в несколько строк.
-        Довольно-таки интересное описание товара в несколько строк
-      </p>
-      <p class="product-price">10 000 руб.</p>
+      <p class="product-name">{{ productName }}</p>
+      <p class="product-description">{{ productDescription }}</p>
+      <p class="product-price">{{ productPrice }} руб.</p>
     </div>
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      trashImage: "/_nuxt/static/img/trash.png",
+      hovered: false,
+    };
+  },
+  methods: {
+    onTrashButton() {
+      this.hovered = true;
+    },
+    offTrashButton() {
+      this.hovered = false;
+    },
+  },
+  props: {
+    productName: {
+      type: String,
+      default: () => "Наименование товара",
+    },
+    productDescription: {
+      type: String,
+      default: () =>
+        "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
+    },
+    productPrice: {
+      type: String,
+      default: () => "10 000",
+    },
+    productImage: {
+      type: String,
+      default: () => "/_nuxt/static/img/default.png",
+    },
+  },
+};
+</script>
+
 <style scoped>
 .product {
+  position: relative;
   width: 332px;
   height: 423px;
   background: #fffefb;
@@ -23,9 +60,17 @@
   cursor: url("../static/img/cursor.png"), pointer;
 }
 
-img {
+.product-image {
   width: 332px;
   height: 200px;
+}
+
+.trash-image {
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 308px;
+  top: -8px;
 }
 
 .product-name {
@@ -45,6 +90,10 @@ img {
   line-height: 20px;
   margin-top: 16px;
   color: #3f3f3f;
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  max-height: 80px
 }
 
 .product-price {
