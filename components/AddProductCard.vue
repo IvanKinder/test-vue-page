@@ -55,7 +55,7 @@ label {
 }
 
 li {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 sup {
@@ -110,7 +110,6 @@ textarea {
   box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
     0px 6px 10px rgba(0, 0, 0, 0.02);
   border-radius: 4px;
-  margin: 16px 32px 0 32px;
   background: white;
 }
 
@@ -124,6 +123,7 @@ button {
   font-style: normal;
   width: 284px;
   height: 36px;
-  margin-top: 8px;
+  margin-top: 9px;
+  cursor: pointer;
 }
 </style>

@@ -17,7 +17,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 32px 32px 0 32px;
-  /* background: #e5e5e5; */
 }
 .add-product-header {
   font-family: "Source Sans Pro", sans-serif;
@@ -33,9 +32,10 @@
   height: 36px;
   background: #fffefb;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border: solid;
   border-radius: 4px;
   border-color: #fff;
-  font-family: "Source Sans Pro";
+  font-family: "Source Sans Pro", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
