@@ -26,7 +26,6 @@
   line-height: 35px;
   color: #3f3f3f;
 }
-
 .sort-button {
   width: 121px;
   height: 36px;
@@ -42,7 +41,6 @@
   line-height: 15px;
   color: #b4b4b4;
 }
-
 .arrow-to-rotate {
   display: inline-block;
   transform: scaleY(0.5);

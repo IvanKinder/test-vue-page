@@ -93,6 +93,7 @@ export default {
   methods: {
     addProduct: function () {
       let newProduct = {
+        id: this.$store.state.productsList.length - 1,
         name: this.name,
         description: this.description,
         imgSrc: this.imgSrc,

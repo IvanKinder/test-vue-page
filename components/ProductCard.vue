@@ -1,8 +1,13 @@
 <template>
-  <div class="product" @mouseover="onTrashButton" @mouseleave="offTrashButton">
-    <img class="product-image" :src="productImage" @error="replaceByDefault"/>
-    <!-- <div class="product-image"><img :src="productImage" alt="default" /></div> -->
-    <img v-show="hovered" class="trash-image" :src="trashImage" alt="trash" />
+  <div class="product" @mouseover="onTrashButton" @mouseleave="offTrashButton" :key="productId">
+    <img class="product-image" :src="productImage" @error="replaceByDefault" />
+    <img
+      v-show="hovered"
+      class="trash-image"
+      :src="trashImage"
+      alt="trash"
+      @click="removeProduct"
+    />
     <div class="product-text">
       <p class="product-name">{{ productName }}</p>
       <p class="product-description">{{ productDescription }}</p>
@@ -29,7 +34,11 @@ export default {
     },
     replaceByDefault() {
       this.productImage = this.defaultImage;
-    }
+    },
+    removeProduct() {
+      console.log(this);
+      this.$store.dispatch("removeProduct", this.productId);
+    },
   },
   computed: {
     beautifyPrice() {
@@ -61,12 +70,16 @@ export default {
         "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
     },
     productPrice: {
-      type: String,
-      default: () => "10 000",
+      type: Number,
+      default: () => 10000,
     },
     productImage: {
       type: String,
       default: () => "/_nuxt/static/img/default.png",
+    },
+    productId: {
+      type: Number,
+      default: () => -1,
     },
   },
 };
@@ -122,7 +135,7 @@ export default {
 
 .product-price {
   position: absolute;
-  top: 335px;
+  top: 338px;
   font-family: "Source Sans Pro", sans-serif;
   font-style: normal;
   font-weight: 600;
