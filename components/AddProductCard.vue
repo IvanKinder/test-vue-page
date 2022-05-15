@@ -47,8 +47,8 @@
         <li class="required-field">
           <label for="price">Цена товара<sup>&bull;</sup></label>
           <input
-            v-model="price"
-            type="number"
+            v-model="beautifyPrice"
+            type="text"
             id="price"
             name="price"
             placeholder="Введите цену"
@@ -73,8 +73,8 @@
 </template>
 
 <script>
-const nameCheckRegex = /^.{1,26}$/;
-const imgCheckRegex = /^.+$/;
+const nameCheckRegex = /^[^`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]{1,26}$/;
+const imgCheckRegex = /^(http[s]?:\/\/(www\.)?|ftp:\/\/(www\.)?|www\.){1}([0-9A-Za-z-\.@:%_\+~#=]+)+((\.[a-zA-Z]{2,3})+)(\/(.)*)?(\?(.)*)?/;
 const priceCheckRegex = /^[0-9]{1,10}$/;
 
 export default {
@@ -83,7 +83,7 @@ export default {
       name: null,
       description: null,
       imgSrc: null,
-      price: null,
+      price: 0,
       isNameTouched: false,
       isImgTouched: false,
       isPriceTouched: false,
@@ -99,10 +99,11 @@ export default {
         price: this.price,
       };
       this.$store.dispatch("addProduct", newProduct);
-      this.name = "";
-      this.description = "";
-      this.imgSrc = "";
-      this.price = "";
+      this.name = null;
+      this.description = null;
+      this.imgSrc = null;
+      this.price = 0;
+      this.beautifyPrice = "";
       this.isNameTouched = false;
       this.isImgTouched = false;
       this.isPriceTouched = false;
@@ -119,22 +120,46 @@ export default {
       return true;
     },
     isNameValid() {
-      return nameCheckRegex.test(this.name);
+      return this.name ? nameCheckRegex.test(this.name) : false;
     },
     isNameError() {
       return !this.isNameValid && this.isNameTouched;
     },
     isImgValid() {
-      return imgCheckRegex.test(this.imgSrc);
+      return this.imgSrc ? imgCheckRegex.test(this.imgSrc) : false;
     },
     isImgError() {
       return !this.isImgValid && this.isImgTouched;
     },
     isPriceValid() {
-      return priceCheckRegex.test(this.price);
+      return this.price ? priceCheckRegex.test(this.price) : false;
     },
     isPriceError() {
       return !this.isPriceValid && this.isPriceTouched;
+    },
+    beautifyPrice: {
+      get() {
+        let beautyPrice = "",
+          j = 0;
+        for (let i in this.price.toString()) {
+          if (j === 3) {
+            beautyPrice += " ";
+            j = 0;
+          }
+          j += 1;
+          beautyPrice += Array.from(this.price.toString()).reverse().join("")[
+            i
+          ];
+        }
+        return this.price === 0 ? "" : Array.from(beautyPrice).reverse().join("");
+      },
+      set(value) {
+        if (!isNaN(value.replace(/\s/g,''))) {
+          this.price = +value.replace(/\s/g,'');
+        } else {
+          this.beautifyPrice = "";
+        }
+      },
     },
   },
 };

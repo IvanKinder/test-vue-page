@@ -1,11 +1,12 @@
 <template>
   <div class="product" @mouseover="onTrashButton" @mouseleave="offTrashButton">
-    <img class="product-image" :src="productImage" alt="default" />
+    <img class="product-image" :src="productImage" @error="replaceByDefault"/>
+    <!-- <div class="product-image"><img :src="productImage" alt="default" /></div> -->
     <img v-show="hovered" class="trash-image" :src="trashImage" alt="trash" />
     <div class="product-text">
       <p class="product-name">{{ productName }}</p>
       <p class="product-description">{{ productDescription }}</p>
-      <p class="product-price">{{ productPrice }} руб.</p>
+      <p class="product-price">{{ beautifyPrice }} руб.</p>
     </div>
   </div>
 </template>
@@ -16,6 +17,7 @@ export default {
     return {
       trashImage: "/_nuxt/static/img/trash.png",
       hovered: false,
+      defaultImage: "/_nuxt/static/img/default.png",
     };
   },
   methods: {
@@ -24,6 +26,28 @@ export default {
     },
     offTrashButton() {
       this.hovered = false;
+    },
+    replaceByDefault() {
+      this.productImage = this.defaultImage;
+    }
+  },
+  computed: {
+    beautifyPrice() {
+      let beautyPrice = "",
+        j = 0;
+      for (let i in this.productPrice.toString()) {
+        if (j === 3) {
+          beautyPrice += " ";
+          j = 0;
+        }
+        j += 1;
+        beautyPrice += Array.from(this.productPrice.toString())
+          .reverse()
+          .join("")[i];
+      }
+      return this.productPrice === 0
+        ? ""
+        : Array.from(beautyPrice).reverse().join("");
     },
   },
   props: {
@@ -93,10 +117,12 @@ export default {
   overflow: hidden;
   word-wrap: break-word;
   text-overflow: ellipsis;
-  max-height: 80px
+  max-height: 80px;
 }
 
 .product-price {
+  position: absolute;
+  top: 335px;
   font-family: "Source Sans Pro", sans-serif;
   font-style: normal;
   font-weight: 600;
