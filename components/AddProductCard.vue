@@ -74,7 +74,8 @@
 
 <script>
 const nameCheckRegex = /^[^`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]{1,26}$/;
-const imgCheckRegex = /^(http[s]?:\/\/(www\.)?|ftp:\/\/(www\.)?|www\.){1}([0-9A-Za-z-\.@:%_\+~#=]+)+((\.[a-zA-Z]{2,3})+)(\/(.)*)?(\?(.)*)?/;
+const imgCheckRegex =
+  /^(http[s]?:\/\/(www\.)?|ftp:\/\/(www\.)?|www\.){1}([0-9A-Za-z-\.@:%_\+~#=]+)+((\.[a-zA-Z]{2,3})+)(\/(.)*)?(\?(.)*)?/;
 const priceCheckRegex = /^[0-9]{1,10}$/;
 
 export default {
@@ -92,9 +93,9 @@ export default {
   },
   methods: {
     addProduct: function () {
-      console.log(this.$store.state.productsList.length);
-      let newProduct = {
-        id: toString(this.$store.state.productsList.length),
+      const today = new Date();
+      const newProduct = {
+        id: today.getTime().toString(),
         name: this.name,
         description: this.description,
         imgSrc: this.imgSrc,
@@ -115,7 +116,7 @@ export default {
     },
   },
   computed: {
-    isDisabled: function () {
+    isDisabled() {
       if (this.isNameValid && this.isImgValid && this.isPriceValid) {
         return false;
       }
@@ -153,11 +154,13 @@ export default {
             i
           ];
         }
-        return this.price === 0 ? "" : Array.from(beautyPrice).reverse().join("");
+        return this.price === 0
+          ? ""
+          : Array.from(beautyPrice).reverse().join("");
       },
       set(value) {
-        if (!isNaN(value.replace(/\s/g,''))) {
-          this.price = +value.replace(/\s/g,'');
+        if (!isNaN(value.replace(/\s/g, ""))) {
+          this.price = +value.replace(/\s/g, "");
         } else {
           this.beautifyPrice = "";
         }

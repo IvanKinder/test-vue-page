@@ -23,6 +23,7 @@
 <script>
 export default {
   data() {
+    this.$store.dispatch("getProducts");
     return {
       products: this.$store.state.productsList,
     };
