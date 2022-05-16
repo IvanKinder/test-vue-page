@@ -27,6 +27,13 @@ export default {
       products: this.$store.state.productsList,
     };
   },
+  // async asyncData(context) {
+  //   const data = await context.$http.$get("/api/products");
+  //   console.log(data);
+  //   return {
+  //     products: data.products,
+  //   };
+  // },
 };
 </script>
 

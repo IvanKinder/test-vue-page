@@ -1,51 +1,51 @@
 const products = [
   {
-    id: 'redaf',
+    id: "redaf",
     name: "Наименование товара",
     description:
       "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
     price: 10000,
-    imgSrc: "/_nuxt/static/img/default.png",
+    imgSrc: "/img/default.png",
   },
   {
-    id: 'safsqwfw',
+    id: "safsqwfw",
     name: "Наименование товара",
     description:
       "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
     price: 10000,
-    imgSrc: "/_nuxt/static/img/default.png",
+    imgSrc: "/img/default.png",
   },
   {
-    id: 'aefqwaq',
+    id: "aefqwaq",
     name: "Наименование товара",
     description:
       "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
     price: 10000,
-    imgSrc: "/_nuxt/static/img/default.png",
+    imgSrc: "/img/default.png",
   },
   {
-    id: 'weq',
+    id: "weq",
     name: "Наименование товара",
     description:
       "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
     price: 10000,
-    imgSrc: "/_nuxt/static/img/default.png",
+    imgSrc: "/img/default.png",
   },
   {
-    id: 'aefwaef',
+    id: "aefwaef",
     name: "Наименование товара",
     description:
       "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
     price: 10000,
-    imgSrc: "/_nuxt/static/img/default.png",
+    imgSrc: "/img/default.png",
   },
   {
-    id: 'wvaevv',
+    id: "wvaevv",
     name: "Наименование товара",
     description:
       "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
     price: 10000,
-    imgSrc: "/_nuxt/static/img/default.png",
+    imgSrc: "/img/default.png",
   },
 ];
 
@@ -59,9 +59,12 @@ export const mutations = {
   },
   removeProduct: (state, payload) => {
     for (let i = 0; i < state.productsList.length; i++) {
-        if (state.productsList[i].id === payload) {
-            state.productsList.splice(state.productsList.indexOf(state.productsList[i]), 1);
-        }
+      if (state.productsList[i].id === payload) {
+        state.productsList.splice(
+          state.productsList.indexOf(state.productsList[i]),
+          1
+        );
+      }
     }
   },
 };

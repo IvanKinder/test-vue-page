@@ -36,9 +36,17 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxt/http'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+  },
+
+  // Register database url
+  serverMiddleware:[
+    {
+      path:'/api',handler:'~/api/index.js'
+    }
+  ]
 }

@@ -25,9 +25,9 @@
 export default {
   data() {
     return {
-      trashImage: "/_nuxt/static/img/trash.png",
+      trashImage: "/img/trash.png",
       hovered: false,
-      defaultImage: "/_nuxt/static/img/default.png",
+      defaultImage: "/img/default.png",
     };
   },
   methods: {
@@ -79,7 +79,7 @@ export default {
     },
     productImage: {
       type: String,
-      default: () => "/_nuxt/static/img/default.png",
+      default: () => "/img/default.png",
     },
     productId: {
       type: String,
