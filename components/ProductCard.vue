@@ -25,9 +25,9 @@
 export default {
   data() {
     return {
-      trashImage: "/_nuxt/static/img/trash.png",
+      trashImage: "/img/trash.png",
       hovered: false,
-      defaultImage: "/_nuxt/static/img/default.png",
+      defaultImage: "/img/default.png",
     };
   },
   methods: {
@@ -41,7 +41,14 @@ export default {
       this.productImage = this.defaultImage;
     },
     removeProduct() {
-      this.$store.dispatch("removeProduct", this.productId);
+    const productToDelete = {
+      id: this.productId,
+      name: this.name,
+      description: this.description,
+      imgSrc: this.imgSrc,
+      price: this.price,
+    };
+      this.$store.dispatch("removeProduct", productToDelete);
     },
   },
   computed: {
@@ -79,7 +86,7 @@ export default {
     },
     productImage: {
       type: String,
-      default: () => "/_nuxt/static/img/default.png",
+      default: () => "/img/default.png",
     },
     productId: {
       type: String,
