@@ -1,5 +1,10 @@
 <template>
-  <div class="product" @mouseover="onTrashButton" @mouseleave="offTrashButton" :key="productId">
+  <div
+    class="product"
+    @mouseover="onTrashButton"
+    @mouseleave="offTrashButton"
+    :key="productId"
+  >
     <img class="product-image" :src="productImage" @error="replaceByDefault" />
     <img
       v-show="hovered"
@@ -36,7 +41,6 @@ export default {
       this.productImage = this.defaultImage;
     },
     removeProduct() {
-      console.log(this);
       this.$store.dispatch("removeProduct", this.productId);
     },
   },
@@ -78,7 +82,7 @@ export default {
       default: () => "/_nuxt/static/img/default.png",
     },
     productId: {
-      type: Number,
+      type: String,
       default: () => -1,
     },
   },
@@ -96,12 +100,13 @@ export default {
   border-radius: 4px;
   cursor: url("../static/img/cursor.png"), pointer;
 }
-
+.product:hover {
+  transform: scale(1.02);
+}
 .product-image {
   width: 332px;
   height: 200px;
 }
-
 .trash-image {
   width: 32px;
   height: 32px;
@@ -109,7 +114,12 @@ export default {
   left: 308px;
   top: -8px;
 }
-
+.trash-image:hover {
+  transform: scale(1.1);
+}
+.trash-image:active {
+  transform: scale(0.9);
+}
 .product-name {
   font-family: "Source Sans Pro", sans-serif;
   font-style: normal;

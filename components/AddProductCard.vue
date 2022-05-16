@@ -92,8 +92,9 @@ export default {
   },
   methods: {
     addProduct: function () {
+      console.log(this.$store.state.productsList.length);
       let newProduct = {
-        id: this.$store.state.productsList.length - 1,
+        id: toString(this.$store.state.productsList.length),
         name: this.name,
         description: this.description,
         imgSrc: this.imgSrc,

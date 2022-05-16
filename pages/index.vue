@@ -57,12 +57,11 @@ export default {
   }
   .products-enter-active,
   .products-leave-active {
-    transition: all 1s;
+    transition: 0.5s;
   }
   .products-enter,
   .products-leave-to {
     opacity: 0;
-    transform: translateY(180px);
   }
 }
 @media (max-width: 1080px) {
