@@ -41,13 +41,13 @@ export default {
       this.productImage = this.defaultImage;
     },
     removeProduct() {
-    const productToDelete = {
-      id: this.productId,
-      name: this.name,
-      description: this.description,
-      imgSrc: this.imgSrc,
-      price: this.price,
-    };
+      const productToDelete = {
+        id: this.productId,
+        name: this.name,
+        description: this.description,
+        imgSrc: this.imgSrc,
+        price: this.price,
+      };
       this.$store.dispatch("removeProduct", productToDelete);
     },
   },

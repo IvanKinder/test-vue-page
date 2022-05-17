@@ -3,7 +3,7 @@
     <div class="header">
       <h1 class="add-product-header">Добавление товара</h1>
       <button class="sort-button">
-        <span @click="showMenu" class="text">{{sortState}}</span>
+        <span @click="showMenu" class="text">{{ sortState }}</span>
         <span class="arrow-to-rotate">&#709;</span>
         <div :class="sortMenuClass" @mouseleave="hideMenu">
           <ul>
@@ -29,7 +29,7 @@ export default {
     return {
       sortMenuClass: "menu-hidden",
       asc: true,
-      sortState: 'По умолчанию',
+      sortState: "По умолчанию",
     };
   },
   methods: {
@@ -42,16 +42,16 @@ export default {
     },
     sortByPriceMin() {
       this.$store.dispatch("sortByPriceMin");
-      this.sortState = 'По цене ↑';
+      this.sortState = "По цене ↑";
     },
     sortByPriceMax() {
       this.$store.dispatch("sortByPriceMax");
-      this.sortState = 'По цене ↓';
+      this.sortState = "По цене ↓";
     },
     sortByName() {
       this.$store.dispatch("sortByName", this.asc);
       this.asc = !this.asc;
-      this.sortState = 'По наименованию';
+      this.sortState = "По наименованию";
     },
   },
 };
