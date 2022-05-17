@@ -1,56 +1,5 @@
 import axios from "axios";
 
-let products = [
-  {
-    id: "redaf",
-    name: "НаименованиеSSS товара",
-    description:
-      "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-    price: 10000,
-    imgSrc: "/img/default.png",
-  },
-  {
-    id: "safsqwfw",
-    name: "Наименование товара",
-    description:
-      "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-    price: 10000,
-    imgSrc: "/img/default.png",
-  },
-  {
-    id: "aefqwaq",
-    name: "Наименование товара",
-    description:
-      "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-    price: 10000,
-    imgSrc: "/img/default.png",
-  },
-  {
-    id: "weq",
-    name: "Наименование товара",
-    description:
-      "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-    price: 10000,
-    imgSrc: "/img/default.png",
-  },
-  {
-    id: "aefwaef",
-    name: "Наименование товара",
-    description:
-      "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-    price: 10000,
-    imgSrc: "/img/default.png",
-  },
-  {
-    id: "wvaevv",
-    name: "Наименование товара",
-    description:
-      "Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк",
-    price: 10000,
-    imgSrc: "/img/default.png",
-  },
-];
-
 export const state = () => ({
   productsList: [],
 });
@@ -69,12 +18,57 @@ export const mutations = {
       }
     }
   },
+  sortByName: (state, asc) => {
+    function sortFn(a, b) {
+      if (asc) {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+      } else {
+        if (a.name > b.name) {
+          return -1;
+        }
+        if (a.name < b.name) {
+          return 1;
+        }
+        return 0;
+      }
+    }
+    state.productsList.sort(sortFn);
+  },
+  sortByPriceMax: (state) => {
+    function sortFn(a, b) {
+      if (a.price > b.price) {
+        return -1;
+      }
+      if (a.price < b.price) {
+        return 1;
+      }
+      return 0;
+    }
+    state.productsList.sort(sortFn);
+  },
+  sortByPriceMin: (state) => {
+    function sortFn(a, b) {
+      if (a.price < b.price) {
+        return -1;
+      }
+      if (a.price > b.price) {
+        return 1;
+      }
+      return 0;
+    }
+    state.productsList.sort(sortFn);
+  },
 };
 
 export const actions = {
   addProduct: (context, newProduct) => {
     async function postProduct(newProduct) {
-        console.log(newProduct);
       await axios.post(`api/product`, newProduct);
     }
     postProduct(newProduct);
@@ -93,5 +87,14 @@ export const actions = {
         context.commit("addProduct", value.data[i]);
       }
     });
+  },
+  sortByName: (context, asc) => {
+    context.commit("sortByName", asc);
+  },
+  sortByPriceMin: (context) => {
+    context.commit("sortByPriceMin");
+  },
+  sortByPriceMax: (context) => {
+    context.commit("sortByPriceMax");
   },
 };
